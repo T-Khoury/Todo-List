@@ -1,7 +1,10 @@
-export default function makeElem(type, attributes) {
+export default function makeElem(type, attributes, text) {
     const element = document.createElement(type);
-    for (key in attributes) {
+    for (let key in attributes) {
         element.setAttribute(key, attributes[key])
+    };
+    if (text) {
+        element.textContent = text
     };
     return element;
 }

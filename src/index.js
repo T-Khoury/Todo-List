@@ -1,1 +1,7 @@
-import makeElem from "./makeElem.js";
+import makeElem from "./makeElem";
+import todoModal from "./modals";
+import { todoApp } from "./todoapp";
+
+todoModal();
+
+

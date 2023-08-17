@@ -1,4 +1,5 @@
 import makeElem from "./makeElem";
+import { todoApp } from "./todoapp";
 
 function todoModal() {
     const todoInputModal = makeElem('div', {class: 'modal'});
@@ -21,20 +22,22 @@ function todoModal() {
 
     priorityInput.append(priorityOptionLow, priorityOptionMed, priorityOptionHigh)
 
-    const todoSubmit = makeElem('button', {type: 'submit'});
+    const projectLabel = makeElem('label', {for: 'todo_project'}, 'Project');
+    const projectInput = makeElem('select', {id: 'todo_project', name: 'todo_project'});
+    todoApp.projects.map((project) => {
+        projectInput.append(makeElem('option', {value: `${project.title}`}, `${project.title}`))
+    });
 
-    todoForm.append(titleLabel, titleInput, descLabel, descInput, dueDateLabel, dueDateInput, priorityLabel, priorityInput, todoSubmit);
+
+    const todoSubmit = makeElem('button', {type: 'submit'}, 'Submit');
+
+    todoForm.append(titleLabel, titleInput, descLabel, descInput, dueDateLabel, dueDateInput, priorityLabel, priorityInput, projectLabel, projectInput, todoSubmit);
 
     todoInputModal.append(todoForm);
 
     const content = document.getElementById('content');
     content.append(todoInputModal);
 
+};
 
-
-
-    
-
-
-
-}
+export default todoModal;
