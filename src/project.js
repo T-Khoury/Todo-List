@@ -7,6 +7,7 @@ const projectProto = {
 const createProject = (title) => {
     const project = Object.create(projectProto);
     project.title = title;
+    project.todos = [];
     return project;
 };
 
