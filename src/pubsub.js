@@ -24,3 +24,5 @@ const eventsHandler = {
         };
     }
 };
+
+export { eventsHandler };
