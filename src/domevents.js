@@ -1,6 +1,7 @@
 import eventsHandler from "./pubsub";
 import { domElements } from "./domelements";
 import createProject from "./project";
+import createTodo from "./todo";
 import { todoApp } from "./todoapp";
 
 
@@ -21,8 +22,9 @@ const domEvents = {
     },
 
     newProjectSubmission: function() {
+        const projectTitle = document.getElementById('project-title');
+        
         const projectSubmitButton = document.getElementById('project-submit');
-        const projectTitle = document.getElementById('project-title')
         projectSubmitButton.addEventListener('click', (event) => {
             event.preventDefault();
             createProject(projectTitle.value);
@@ -30,9 +32,17 @@ const domEvents = {
     },
 
     newTodoSubmission: function() {
+        const todoTitle = document.getElementById('todo-title');
+        const todoDesc = document.getElementById('todo-description');
+        const todoDate = document.getElementById('todo-dueDate');
+        const todoPriority = document.getElementById('todo-priority');
+        const todoProject = document.getElementById('todo-project');
         const todoSubmitButton = document.getElementById('todo-submit');
+
         todoSubmitButton.addEventListener('click', (event) => {
             event.preventDefault();
+            let newTodo = createTodo(todoTitle.value, todoDesc.value, todoDate.value, todoPriority.value);
+            todoApp.projects.find(({ title }) => title === `${todoProject.value}`).todos.push(newTodo);
         })
     }
 
