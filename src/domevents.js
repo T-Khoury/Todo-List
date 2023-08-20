@@ -21,13 +21,20 @@ const domEvents = {
         });
     },
 
+    deleteModal: function() {
+        const currentModal = document.querySelector('.modal');
+        currentModal.remove();
+    },
+
     newProjectSubmission: function() {
         const projectTitle = document.getElementById('project-title');
-        
-        const projectSubmitButton = document.getElementById('project-submit');
-        projectSubmitButton.addEventListener('click', (event) => {
+
+        const projectForm = document.getElementById('project-form');
+
+        projectForm.addEventListener('submit', (event) => {
             event.preventDefault();
             createProject(projectTitle.value);
+            domEvents.deleteModal();
         })
     },
 
@@ -37,13 +44,19 @@ const domEvents = {
         const todoDate = document.getElementById('todo-dueDate');
         const todoPriority = document.getElementById('todo-priority');
         const todoProject = document.getElementById('todo-project');
-        const todoSubmitButton = document.getElementById('todo-submit');
+        const todoForm = document.getElementById('todo-form');
 
-        todoSubmitButton.addEventListener('click', (event) => {
+        todoForm.addEventListener('submit', (event) => {
             event.preventDefault();
             let newTodo = createTodo(todoTitle.value, todoDesc.value, todoDate.value, todoPriority.value);
+            
+            /* This finds the project in todoApp array of projects which matches the selected project in the dropdown of todo creation modal, then pushes the todo to that projects array of todos  */
             todoApp.projects.find(({ title }) => title === `${todoProject.value}`).todos.push(newTodo);
-        })
+
+            domEvents.deleteModal();
+
+
+        });
     }
 
 
