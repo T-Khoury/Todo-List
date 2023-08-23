@@ -5,8 +5,11 @@ import { defaultProject, todoApp } from "./todoapp";
 const pageLoad = function () {
     domElements.createButtons();
     domEvents.createModalsWithButtons();
-    defaultProject();
     todoApp.acceptData();
+    domElements.renderProjects();
+    domEvents.attachProjectExpand();
+    defaultProject();
+
 };
 
 

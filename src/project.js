@@ -12,6 +12,7 @@ const createProject = (title) => {
     project.todos = [];
 
     eventsHandler.publish('projectCreated', project);
+    
     return project;
 };
 

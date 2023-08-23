@@ -1,4 +1,4 @@
-import eventsHandler from "./pubsub";
+import { eventsHandler } from "./pubsub";
 import { domElements } from "./domelements";
 import createProject from "./project";
 import createTodo from "./todo";
@@ -27,7 +27,7 @@ const domEvents = {
     },
 
     newProjectSubmission: function() {
-        const projectTitle = document.getElementById('project-title');
+        const projectTitle = document.getElementById('project-title-input');
 
         const projectForm = document.getElementById('project-form');
 
@@ -39,26 +39,38 @@ const domEvents = {
     },
 
     newTodoSubmission: function() {
-        const todoTitle = document.getElementById('todo-title');
-        const todoDesc = document.getElementById('todo-description');
-        const todoDate = document.getElementById('todo-dueDate');
-        const todoPriority = document.getElementById('todo-priority');
-        const todoProject = document.getElementById('todo-project');
-        const todoForm = document.getElementById('todo-form');
+        const todoTitleInput = document.getElementById('todo-title-input');
+        const todoDescInput = document.getElementById('todo-description-input');
+        const todoDateInput = document.getElementById('todo-dueDate-input');
+        const todoPriorityInput = document.getElementById('todo-priority-input');
+        const todoProjectInput = document.getElementById('todo-project-input');
+        const todoFormInput = document.getElementById('todo-form-input');
 
-        todoForm.addEventListener('submit', (event) => {
+        todoFormInput.addEventListener('submit', (event) => {
             event.preventDefault();
-            let newTodo = createTodo(todoTitle.value, todoDesc.value, todoDate.value, todoPriority.value);
+            let newTodo = createTodo(todoTitleInput.value, todoDescInput.value, todoDateInput.value, todoPriorityInput.value);
             
             /* This finds the project in todoApp array of projects which matches the selected project in the dropdown of todo creation modal, then pushes the todo to that projects array of todos  */
-            todoApp.projects.find(({ title }) => title === `${todoProject.value}`).todos.push(newTodo);
+            todoApp.projects.find(({ title }) => title === `${todoProjectInput.value}`).todos.push(newTodo);
 
             domEvents.deleteModal();
 
 
         });
-    }
+    },
 
+    attachProjectExpand: function() {
+        eventsHandler.subscribe('projectCreated', domEvents.displayProjectsTodos);
+    },
+
+    displayProjectsTodos: function(project) {
+        console.log(project);
+        const projectElement = document.querySelector('.project:last-child');
+        console.log(projectElement);
+        projectElement.addEventListener('click', () => {
+                domElements.renderTodos(project);
+            });
+    },
 
     
 };

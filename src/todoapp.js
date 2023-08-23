@@ -15,8 +15,7 @@ const todoApp = {
 
 
 function defaultProject() {
-    const personalProject = createProject('Personal');
-    todoApp.projects.push(personalProject);
+    createProject('Personal');
 };
 
 
