@@ -5,6 +5,7 @@ import createTodo from "./todo";
 import { todoApp } from "./todoapp";
 
 
+
 const domEvents = {
 
     createModalsWithButtons: function() {
@@ -46,31 +47,67 @@ const domEvents = {
         const todoProjectInput = document.getElementById('todo-project-input');
         const todoFormInput = document.getElementById('todo-form-input');
 
+        const todoContainer = document.getElementById('todo-container');
+
         todoFormInput.addEventListener('submit', (event) => {
             event.preventDefault();
-            let newTodo = createTodo(todoTitleInput.value, todoDescInput.value, todoDateInput.value, todoPriorityInput.value);
+            createTodo(todoTitleInput.value, todoDescInput.value, todoDateInput.value, todoPriorityInput.value, todoProjectInput.value);
             
-            /* This finds the project in todoApp array of projects which matches the selected project in the dropdown of todo creation modal, then pushes the todo to that projects array of todos  */
-            todoApp.projects.find(({ title }) => title === `${todoProjectInput.value}`).todos.push(newTodo);
+            
+    
 
-            domEvents.deleteModal();
+           domEvents.deleteModal();
+
+            
 
 
         });
     },
 
-    attachProjectExpand: function() {
-        eventsHandler.subscribe('projectCreated', domEvents.displayProjectsTodos);
+    domUpdates: function() {
+        eventsHandler.subscribe('projectDivCreated', domEvents.projectEventListener);
+        eventsHandler.subscribe('todoContainerUpdated', domElements.renderTodos);
+        eventsHandler.subscribe('todoCreated', domEvents.checkForInstantRender);
     },
 
-    displayProjectsTodos: function(project) {
-        console.log(project);
+
+    projectEventListener: function(projectDiv) {
+        projectDiv.addEventListener('click', function () {
+            domEvents.changeTodoContainerClass(projectDiv);
+        });
+    },
+
+    changeTodoContainerClass: function(projectDiv) {
+        const todoContainer = document.getElementById('todo-container');
+        todoContainer.setAttribute('class', `${projectDiv.innerText}`);
+        eventsHandler.publish('todoContainerUpdated', todoContainer.getAttribute('class'));
+    },
+
+    checkForInstantRender: function(project) {
+        let currentActiveProject = document.getElementById('todo-container').getAttribute('class');
+        if (currentActiveProject === project) {
+            domElements.renderTodos(project);
+        } else {
+            return;
+        };
+
+    }
+
+    /* attachProjectExpand: function() {
+        eventsHandler.subscribe('projectCreated', domEvents.displayProjectsTodos);
+    },  */
+
+    /* displayProjectsTodos: function(project) {
         const projectElement = document.querySelector('.project:last-child');
-        console.log(projectElement);
         projectElement.addEventListener('click', () => {
                 domElements.renderTodos(project);
             });
-    },
+    },  */
+
+    /* displayTodos: function(project) {
+        eventsHandler.subscribe('todoContainerUpdated', domElements.renderTodos);
+    }, */
+
 
     
 };

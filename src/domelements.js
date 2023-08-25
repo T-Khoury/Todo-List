@@ -74,11 +74,11 @@ const domElements = {
         const projectSection = document.getElementById('projects');
         const projectDiv = makeElem('div', {class: 'project'}, `${project.title}`);
         projectSection.append(projectDiv);
+        eventsHandler.publish('projectDivCreated', projectDiv);
+        console.log(projectDiv);
     },
 
     todoElementCreate: function(todo) {
-
-        console.log(todo);
 
         const todoElement = makeElem('div', {class: 'todo-element'});
         const todoCheckBox = makeElem('input', {type: 'checkbox', name: 'complete'});
@@ -92,15 +92,14 @@ const domElements = {
     renderProjects: function() {
         eventsHandler.subscribe('projectCreated', domElements.projectElementCreate);
 
-    },
+    }, 
 
-    renderTodos: function(project) {
-
-        console.log(project.todos);
+    renderTodos: function(projectName) {
 
         const todoContainer = document.getElementById('todo-container');
+        const projectObject = todoApp.projects.find(({ title }) => title === `${projectName}`);
 
-        const todoArray = project.todos;
+        const todoArray = projectObject.todos;
         
         const todoElements = todoArray.map((todo) => domElements.todoElementCreate(todo));
 
@@ -108,12 +107,7 @@ const domElements = {
 
         todoElements.forEach((element) => todoContainer.append(element));
 
-        console.log(todoArray);
-
-     /*   todoElements.forEach((element) => todoContainer.append(element));  */
-    }
-
-
+    },
 
 
 };
