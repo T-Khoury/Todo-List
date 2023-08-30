@@ -6,17 +6,18 @@ import { eventsHandler } from "./pubsub"
 
 const domElements = {
     createButtons: function() {
-        const content = document.getElementById('content');
+        const maincontent = document.getElementById('main');
         const projects = document.getElementById('projects');
     
         const newTodo = makeElem('button', {id: 'new-todo-button'}, 'New ToDo');
         const newProject = makeElem('button', {id: 'new-project-button'}, 'New Project');
     
-        content.append(newTodo);
-        content.append(newProject);
+        maincontent.append(newTodo);
+        projects.append(newProject);
     },
     todoModal: function() {
         const todoInputModal = makeElem('div', {class: 'modal'});
+        const todoInputModalContent = makeElem('div', {class: 'modal-content'});
         const todoForm = makeElem('form', {id: 'todo-form-input'});
 
         const titleLabel = makeElem('label', {for: 'todo-title-input'}, 'Title');
@@ -47,13 +48,15 @@ const domElements = {
 
         todoForm.append(titleLabel, titleInput, descLabel, descInput, dueDateLabel, dueDateInput, priorityLabel, priorityInput, projectLabel, projectInput, todoSubmit);
 
-        todoInputModal.append(todoForm);
+        todoInputModalContent.append(todoForm);
+        todoInputModal.append(todoInputModalContent);
 
         const content = document.getElementById('content');
         content.append(todoInputModal);
     },
     projectModal: function() {
         const projectInputModal = makeElem('div', {class: 'modal'});
+        const projectInputModalContent = makeElem('div', {class: 'modal-content'});
         const projectForm = makeElem('form', {id: 'project-form'});
 
         const titleLabel = makeElem('label', {for: 'project-title-input'}, 'Title');
@@ -62,7 +65,8 @@ const domElements = {
         const projectSubmit = makeElem('button', {type: 'submit', id: 'project-submit'}, 'Submit');
 
         projectForm.append(titleLabel, titleInput, projectSubmit);
-        projectInputModal.append(projectForm);
+        projectInputModalContent.append(projectForm);
+        projectInputModal.append(projectInputModalContent);
 
         const content = document.getElementById('content');
 

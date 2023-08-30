@@ -14,10 +14,12 @@ const domEvents = {
 
         newTodoButton.addEventListener('click', function () {
             domElements.todoModal();
+            domEvents.closeModalFunction();
             domEvents.newTodoSubmission();
         });
         newProjectButton.addEventListener('click', function () {
             domElements.projectModal();
+            domEvents.closeModalFunction();
             domEvents.newProjectSubmission();
         });
     },
@@ -25,6 +27,16 @@ const domEvents = {
     deleteModal: function() {
         const currentModal = document.querySelector('.modal');
         currentModal.remove();
+    },
+
+    closeModalFunction: function() {
+        const modal = document.querySelector('.modal');
+        window.addEventListener('click', (event) => {
+            if (event.target == modal) {
+                console.log('bbbb');
+                domEvents.deleteModal();
+            };
+        });
     },
 
     newProjectSubmission: function() {
