@@ -1,7 +1,8 @@
 import makeElem from "./makeElem";
 import { todoApp } from "./todoapp";
 import { eventsHandler } from "./pubsub";
-import todoicon from './images/icons/plus-square.svg';
+import todoicon from './assets/icons/plus-square.svg';
+import projecticon from './assets/icons/add-outline.svg';
 
 
 
@@ -9,15 +10,18 @@ const domElements = {
     createButtons: function() {
         const maincontent = document.getElementById('main');
         const projects = document.getElementById('projects');
+        const projectsContainer = document.getElementById('projects-container');
     
         const newTodo = makeElem('button', {id: 'new-todo-button'});
         const todoButtonImg = makeElem('img', {src: todoicon, alt: 'New todo button'});
-        const newProject = makeElem('button', {id: 'new-project-button'}, 'New Project');
+        const newProject = makeElem('button', {id: 'new-project-button'});
+        const projectButtonImg = makeElem('img', {src: projecticon, alt: 'New project button'});
 
         newTodo.append(todoButtonImg);
+        newProject.append(projectButtonImg);
     
         maincontent.append(newTodo);
-        projects.append(newProject);
+        projects.insertBefore(newProject, projectsContainer);
     },
     todoModal: function() {
         const todoInputModal = makeElem('div', {class: 'modal'});
@@ -81,7 +85,7 @@ const domElements = {
     },
 
     projectElementCreate: function(project) {
-        const projectSection = document.getElementById('projects');
+        const projectSection = document.getElementById('projects-container');
         const projectDiv = makeElem('div', {class: 'project'}, `${project.title}`);
         projectSection.append(projectDiv);
         eventsHandler.publish('projectDivCreated', projectDiv);
