@@ -95,10 +95,10 @@ const domEvents = {
         eventsHandler.publish('todoContainerUpdated', todoContainer.getAttribute('class'));
     },
 
-    checkForInstantRender: function(project) {
+    checkForInstantRender: function(todo) {
         let currentActiveProject = document.getElementById('todo-container').getAttribute('class');
-        if (currentActiveProject === project) {
-            domElements.renderTodos(project);
+        if (currentActiveProject === todo.project) {
+            domElements.renderTodos(todo.project);
         } else {
             return;
         };

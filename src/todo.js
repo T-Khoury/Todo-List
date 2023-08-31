@@ -30,10 +30,9 @@ const createTodo = (title, description, dueDate, priority, project) => {
     toDo.project = project;
     toDo.isCompleted = false;
 
-    /* This finds the project in todoApp array of projects which matches the selected project in the dropdown of todo creation modal, then pushes the todo to that projects array of todos  */
-    todoApp.projects.find(({ title }) => title === `${toDo.project}`).todos.push(toDo);
+    
 
-    eventsHandler.publish('todoCreated', toDo.project);
+    eventsHandler.publish('todoCreated', toDo);
 
     
     return toDo;

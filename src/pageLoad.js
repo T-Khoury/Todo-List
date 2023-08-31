@@ -1,6 +1,7 @@
 import { domEvents } from "./domevents";
 import { domElements } from "./domelements";
-import { defaultProject, todoApp } from "./todoapp";
+import { todoApp } from "./todoapp";
+import storage from "./localstorage";
 
 const pageLoad = function () {
     
@@ -9,7 +10,10 @@ const pageLoad = function () {
     todoApp.acceptData();
     domElements.renderProjects();
     domEvents.domUpdates();
-    defaultProject();
+
+    storage.retrieveStorage();
+    storage.getUpdates();
+
     
 };
 

@@ -1,6 +1,7 @@
 import makeElem from "./makeElem";
 import { todoApp } from "./todoapp";
-import { eventsHandler } from "./pubsub"
+import { eventsHandler } from "./pubsub";
+import todoicon from './images/icons/plus-square.svg';
 
 
 
@@ -9,8 +10,11 @@ const domElements = {
         const maincontent = document.getElementById('main');
         const projects = document.getElementById('projects');
     
-        const newTodo = makeElem('button', {id: 'new-todo-button'}, 'New ToDo');
+        const newTodo = makeElem('button', {id: 'new-todo-button'});
+        const todoButtonImg = makeElem('img', {src: todoicon, alt: 'New todo button'});
         const newProject = makeElem('button', {id: 'new-project-button'}, 'New Project');
+
+        newTodo.append(todoButtonImg);
     
         maincontent.append(newTodo);
         projects.append(newProject);
@@ -53,6 +57,8 @@ const domElements = {
 
         const content = document.getElementById('content');
         content.append(todoInputModal);
+
+        eventsHandler.publish('modalCreated', )
     },
     projectModal: function() {
         const projectInputModal = makeElem('div', {class: 'modal'});

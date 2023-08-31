@@ -47,6 +47,15 @@ table {
 	border-spacing: 0;
 }
 
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0}
+    top {top:0; opacity: 1;}
+}
+@keyframes animatetop {
+    from {top:-300px; opacity: 0;}
+    to {top:0; opacity: 1;}
+}
+
 
 
 header {
@@ -63,6 +72,7 @@ input {
 button#todo-submit,
 button#project-submit {
     display: block;
+    margin: auto;
 }
 #content {
     height: 100vh;
@@ -99,6 +109,18 @@ button#project-submit {
     grid-area: main;
 }
 
+#new-todo-button {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    border-style: none;
+    background-color: transparent;
+}
+
+#new-todo-button img {
+    height: 6rem;
+}
+
 .modal {
     display: grid;
     position: fixed;
@@ -133,12 +155,5 @@ button#project-submit {
     place-self: center;
 }
 
-@-webkit-keyframes animatetop {
-    from {top:-300px; opacity:0}
-    top {top:0; opacity: 1;}
-}
-@keyframes animatetop {
-    from {top:-300px; opacity: 0;}
-    to {top:0; opacity: 1;}
-}
+
 
