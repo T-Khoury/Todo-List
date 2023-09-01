@@ -48,8 +48,17 @@ table {
 }
 
 @font-face {
+    font-family: 'Alata';
+    src: url('./assets/fonts/Alata-Regular.ttf');
+}
+@font-face {
     font-family: 'Handjet';
     src: url('./assets/fonts/Handjet-VariableFont_ELGR\,ELSH\,wght.ttf');
+}
+
+@font-face {
+    font-family: 'Noto Sans';
+    src: url('./assets/fonts/NotoSans-Regular.ttf');
 }
 
 @-webkit-keyframes animatetop {
@@ -66,12 +75,14 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     padding: 1rem;
+    font-family: 'Alata';
+    font-weight: 500;
 }
 
 
 header {
     font-family: 'Handjet';
-    font-size: 3rem;
+    font-size: 5rem;
     font-weight: bold;
     grid-area: header;
 }
@@ -79,6 +90,7 @@ header {
 input {
     display: block;
 }
+
 
 button#todo-submit,
 button#project-submit {
@@ -187,6 +199,46 @@ button#project-submit {
     border-radius: 12px;
     place-self: center;
 }
+
+.project {
+    margin: 1rem 0;
+}
+
+.todo-element {
+    display: flex;
+    justify-content: flex-start;
+    column-gap: 2rem;
+    height: 3rem;
+    align-items: center;
+    border-style: ridge;
+    border-width: 5px;
+    border-color: #cc99ff;
+    width: 80%;
+    margin: 1rem 0;
+    text-decoration: dashed;
+}
+.todo-element input[type="checkbox"] {
+    height: 1.5rem;
+    width: 1.5rem;
+    margin-left: 1rem;
+}
+
+.todo-element input[type=checkbox]:checked ~ p {
+    text-decoration: line-through;
+    color: gray;
+}
+
+.todo-title, 
+.todo-date {
+    font-size: 1.5rem;
+}
+
+.todo-date {
+    margin-left: auto;
+    margin-right: 2rem;
+}
+
+
 
 
 
