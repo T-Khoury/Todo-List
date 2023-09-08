@@ -18,6 +18,14 @@ const todoApp = {
 
         eventsHandler.publish('todoAppUpdated', todoApp.projects);
     },
+    deleteTodo: function(todo) {
+        /* const thisproject = todoApp.projects.find(({ title }) => title === document.getElementById('todo-container').getAttribute('class')); */
+        const thisproject = todoApp.projects.find(({ title }) => title === todo.project);
+        const thistodo = thisproject.todos.find(({ title }) => title === todo.title);
+        thisproject.todos.splice((thisproject.todos.indexOf(thistodo)), 1);
+        console.log(todoApp);
+        eventsHandler.publish('todoAppUpdated', todoApp.projects);
+    },
 
     defaultProject: function() {
         createProject('Personal');

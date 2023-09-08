@@ -150,19 +150,34 @@ button#project-submit {
 }
 
 #new-todo-button img {
-    height: 6rem;
+    height: 5rem;
+    border-radius: 0.5rem; 
+    transition: transform .5s ease-in-out;
+}
+
+#new-todo-button img:hover {
+    filter: invert(1) sepia(1) saturate(20) hue-rotate(57.6deg);
+    transform: scale(1.2);
+
 }
 
 #new-project-button {
     border-style: none;
     background-color: transparent;
     position: relative;
-    top: 0.5rem;
-    right: 0.5rem;
+    top: 0.2rem;
+    right: 0.1rem;
 }
 
 #new-project-button img {
-    height: 3rem;
+    height: 2rem;
+    transition: transform .5s ease-in-out;
+}
+
+#new-project-button img:hover {
+    filter: invert(1) sepia(1) saturate(20) hue-rotate(57.6deg);
+    transform: scale(1.2) rotate(180deg);
+   
 }
 
 .modal {
@@ -201,21 +216,30 @@ button#project-submit {
 }
 
 .project {
+    max-width: fit-content;
     margin: 1rem 0;
+    cursor: grab;
+    transition: all .2s ease-in-out;
+}
+
+.project:hover {
+    font-size: 1.7rem;
 }
 
 .todo-element {
     display: flex;
+    flex-wrap: wrap;
     justify-content: flex-start;
     column-gap: 2rem;
-    height: 3rem;
     align-items: center;
     border-style: ridge;
     border-width: 5px;
     border-color: #cc99ff;
     width: 80%;
     margin: 1rem 0;
+    padding: .8rem 0;
     text-decoration: dashed;
+    cursor: default;
 }
 .todo-element input[type="checkbox"] {
     height: 1.5rem;
@@ -236,6 +260,16 @@ button#project-submit {
 .todo-date {
     margin-left: auto;
     margin-right: 2rem;
+}
+
+.todo-description {
+    flex: 0 0 100%;
+    font-size: 1.4rem;
+    padding-left: 30%;
+}
+
+.hidden {
+    display: none;
 }
 
 

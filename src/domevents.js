@@ -80,6 +80,7 @@ const domEvents = {
         eventsHandler.subscribe('projectDivCreated', domEvents.projectEventListener);
         eventsHandler.subscribe('todoContainerUpdated', domElements.renderTodos);
         eventsHandler.subscribe('todoCreated', domEvents.checkForInstantRender);
+        eventsHandler.subscribe('todoDeleted', domElements.renderTodos);
     },
 
 
@@ -91,7 +92,8 @@ const domEvents = {
 
     changeTodoContainerClass: function(projectDiv) {
         const todoContainer = document.getElementById('todo-container');
-        todoContainer.setAttribute('class', `${projectDiv.innerText}`);
+        todoContainer.setAttribute('class', `${projectDiv.textContent}`);
+        console.log(todoContainer.getAttribute('class'));
         eventsHandler.publish('todoContainerUpdated', todoContainer.getAttribute('class'));
     },
 
@@ -104,6 +106,7 @@ const domEvents = {
         };
 
     }
+
 
     /* attachProjectExpand: function() {
         eventsHandler.subscribe('projectCreated', domEvents.displayProjectsTodos);
