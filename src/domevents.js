@@ -65,12 +65,7 @@ const domEvents = {
             event.preventDefault();
             createTodo(todoTitleInput.value, todoDescInput.value, todoDateInput.value, todoPriorityInput.value, todoProjectInput.value);
             
-            
-    
-
            domEvents.deleteModal();
-
-            
 
 
         });
@@ -84,17 +79,21 @@ const domEvents = {
     },
 
 
-    projectEventListener: function(projectDiv) {
-        projectDiv.addEventListener('click', function () {
-            domEvents.changeTodoContainerClass(projectDiv);
+    projectEventListener: function(projectLabel) {
+        projectLabel.addEventListener('click', function () {
+            domEvents.changeTodoContainerClass(projectLabel);
         });
     },
 
-    changeTodoContainerClass: function(projectDiv) {
+    changeTodoContainerClass: function(projectLabel) {
         const todoContainer = document.getElementById('todo-container');
-        todoContainer.setAttribute('class', `${projectDiv.textContent}`);
-        console.log(todoContainer.getAttribute('class'));
+        todoContainer.setAttribute('class', `${projectLabel.textContent}`);
         eventsHandler.publish('todoContainerUpdated', todoContainer.getAttribute('class'));
+    },
+
+    emptyTodoContainer: function() {
+        const todoContainer = document.getElementById('todo-container');
+        todoContainer.replaceChildren();
     },
 
     checkForInstantRender: function(todo) {

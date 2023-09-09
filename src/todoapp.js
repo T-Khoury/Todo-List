@@ -26,6 +26,16 @@ const todoApp = {
         console.log(todoApp);
         eventsHandler.publish('todoAppUpdated', todoApp.projects);
     },
+    deleteProject: function(project) {
+        console.log(todoApp);
+        console.log(project);
+        const thisproject = todoApp.projects.find(({ title }) => title === project.title);
+        console.log(thisproject);
+
+        todoApp.projects.splice((todoApp.projects.indexOf(thisproject)), 1);
+        eventsHandler.publish('todoAppUpdated', todoApp.projects);
+        eventsHandler.publish('projectDeleted', todoApp.projects);
+    },
 
     defaultProject: function() {
         createProject('Personal');

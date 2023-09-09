@@ -155,10 +155,24 @@ const domElements = {
 
     projectElementCreate: function(project) {
         const projectSection = document.getElementById('projects-container');
-        const projectDiv = makeElem('div', {class: 'project'}, `${project.title}`);
+        const projectDiv = makeElem('div', {class: 'project'});
+        const projectLabel = makeElem('p', {class: 'label'}, `${project.title}`)
+
+        const projectDeleteButton = makeElem('img', {src: deleteicon});
+        projectDeleteButton.addEventListener('click', () => {
+            todoApp.deleteProject(project);
+        })
+        projectDiv.append(projectLabel, projectDeleteButton)
         projectSection.append(projectDiv);
-        eventsHandler.publish('projectDivCreated', projectDiv);
+        eventsHandler.publish('projectDivCreated', projectLabel);
         console.log(projectDiv);
+    },
+
+    projectContainerRefresh: function(projects) {
+        const projectContainer = document.getElementById('projects-container');
+        projectContainer.replaceChildren();
+        projects.forEach((project) => domElements.projectElementCreate(project));
+
     },
 
     todoElementCreate: function(todo) {
@@ -209,13 +223,14 @@ const domElements = {
 
     renderProjects: function() {
         eventsHandler.subscribe('projectCreated', domElements.projectElementCreate);
-
+        eventsHandler.subscribe('projectDeleted', domElements.projectContainerRefresh);
+        eventsHandler.subscribe('projectDeleted', domEvents.emptyTodoContainer);
     }, 
 
     renderTodos: function(projectName) {
+        console.log(todoApp);
 
         const todoContainer = document.getElementById('todo-container');
-        console.log(todoContainer);
         const projectObject = todoApp.projects.find(({ title }) => title === `${projectName}`);
 
         const todoArray = projectObject.todos;

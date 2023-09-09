@@ -220,6 +220,7 @@ button#project-submit {
     margin: 1rem 0;
     cursor: grab;
     transition: all .2s ease-in-out;
+    display: flex;
 }
 
 .project:hover {

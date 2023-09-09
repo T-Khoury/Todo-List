@@ -13,7 +13,7 @@ const storage = {
         localStorage.setItem('mydata', JSON.stringify(projects));
     },
     retrieveStorage: function() {
-        if (localStorage.getItem('mydata') == null) {
+        if ((localStorage.getItem('mydata') == null) || (localStorage.getItem('mydata') === '[]')) {
             todoApp.defaultProject();
         } else {
         const data = localStorage.getItem('mydata');
