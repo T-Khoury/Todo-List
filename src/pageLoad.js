@@ -13,6 +13,8 @@ const pageLoad = function () {
 
     storage.retrieveStorage();
     storage.getUpdates();
+    domEvents.dateListeners();
+    todoApp.todaysTodos();
 
     
 };

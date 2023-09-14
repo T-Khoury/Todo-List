@@ -104,26 +104,23 @@ const domEvents = {
             return;
         };
 
+    },
+
+    dateListeners: function() {
+        const todayButton = document.getElementById('today');
+        todayButton.addEventListener('click', () => {
+            todoApp.todaysTodos();
+        });
+        const weekButton = document.getElementById('this-week');
+        weekButton.addEventListener('click', () => {
+            todoApp.thisWeeksTodos();
+        });
+        const monthButton = document.getElementById('this-month');
+        monthButton.addEventListener('click', () => {
+            todoApp.thisMonthsTodos();
+        });
     }
 
-
-    /* attachProjectExpand: function() {
-        eventsHandler.subscribe('projectCreated', domEvents.displayProjectsTodos);
-    },  */
-
-    /* displayProjectsTodos: function(project) {
-        const projectElement = document.querySelector('.project:last-child');
-        projectElement.addEventListener('click', () => {
-                domElements.renderTodos(project);
-            });
-    },  */
-
-    /* displayTodos: function(project) {
-        eventsHandler.subscribe('todoContainerUpdated', domElements.renderTodos);
-    }, */
-
-
-    
 };
 
 

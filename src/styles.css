@@ -120,6 +120,12 @@ button#project-submit {
 
 #date-sorted {
     grid-area: sorted;
+    margin: 1rem 1rem 1rem 0;
+    font-size: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
 }
 
 #projects {
@@ -180,6 +186,10 @@ button#project-submit {
    
 }
 
+.dated {
+    cursor: grab;
+}
+
 .modal {
     display: grid;
     position: fixed;
@@ -216,11 +226,11 @@ button#project-submit {
 }
 
 .project {
-    max-width: fit-content;
     margin: 1rem 0;
     cursor: grab;
     transition: all .2s ease-in-out;
     display: flex;
+    column-gap: .75rem;
 }
 
 .project:hover {

@@ -1,5 +1,7 @@
 import createProject from "./project";
 import { eventsHandler } from "./pubsub";
+import { parseISO, isThisMonth, isThisWeek, isToday } from "date-fns";
+import { domElements } from "./domelements";
 
 const todoApp = {
     projects: [],
@@ -39,6 +41,68 @@ const todoApp = {
 
     defaultProject: function() {
         createProject('Personal');
+    },
+
+    todaysTodos: function(todoapp) {
+        let todaysTodosArray = [];
+        let todayProject = {
+            title: 'Today',
+            todos: []
+        };
+        todoApp.projects.forEach((project) => {
+            project.todos.forEach((todo) => { 
+                if (isToday(parseISO(todo.dueDate))){ 
+                    todaysTodosArray.push(todo);
+                };
+            });
+        });
+
+        todayProject.todos = todaysTodosArray;
+        todoApp.projects.push(todayProject);
+        domElements.renderTodos('Today');
+        todoApp.projects.pop();
+
+        
+    },
+
+    thisWeeksTodos: function(todoapp) {
+        let thisWeeksTodosArray = [];
+        let thisWeekProject = {
+            title: 'This Week',
+            todos: []
+        };
+        todoApp.projects.forEach((project) => {
+            project.todos.forEach((todo) => { 
+                if (isThisWeek(parseISO(todo.dueDate))){ 
+                    thisWeeksTodosArray.push(todo);
+                };
+            });
+        });
+
+        thisWeekProject.todos = thisWeeksTodosArray;
+        todoApp.projects.push(thisWeekProject);
+        domElements.renderTodos('This Week');
+        todoApp.projects.pop();;
+    },
+
+    thisMonthsTodos: function(todoapp) {
+        let thisMonthsTodosArray = [];
+        let thisMonthProject = {
+            title: 'This Month',
+            todos: []
+        };
+        todoApp.projects.forEach((project) => {
+            project.todos.forEach((todo) => { 
+                if (isThisMonth(parseISO(todo.dueDate))){ 
+                    thisMonthsTodosArray.push(todo);
+                };
+            });
+        });
+
+        thisMonthProject.todos = thisMonthsTodosArray;
+        todoApp.projects.push(thisMonthProject);
+        domElements.renderTodos('This Month');
+        todoApp.projects.pop();
     }
 };
 
