@@ -211,9 +211,30 @@ const domElements = {
 
         todoDeleteButton.addEventListener('click', () => {
             const projecttitle = document.getElementById('todo-container').getAttribute('class');
-            const todotitle = todoTitle.textContent;
+            const selectedElement = Array.from(document.querySelectorAll('#date-sorted > *, .label')).find((element) => element.classList.contains('selected')).textContent;
             todoApp.deleteTodo(todo);
-            eventsHandler.publish('todoDeleted', projecttitle);
+            if (projecttitle === Array.from(document.querySelectorAll('#date-sorted > *, .label')).find((element) => element.classList.contains('selected')).textContent) {
+                eventsHandler.publish('todoDeleted', projecttitle);
+                console.log('1');
+            } else {
+                switch (selectedElement) {
+                    case 'Today':
+                        todoApp.todaysTodos();
+                        break;
+                    case 'This Week':
+                        todoApp.thisWeeksTodos();
+                        break;
+                    case 'This Month':
+                        todoApp.thisMonthsTodos();
+                        break;
+                    default:
+                        console.log('error');
+
+                };
+            
+            };
+
+    
         });
 
         todoElement.append(todoCheckBox, todoTitle, todoDate, todoExpandButton, todoEditButton, todoDeleteButton, todoDescription);
@@ -228,8 +249,6 @@ const domElements = {
     }, 
 
     renderTodos: function(projectName) {
-        console.log(todoApp);
-
         const todoContainer = document.getElementById('todo-container');
         const projectObject = todoApp.projects.find(({ title }) => title === `${projectName}`);
 
@@ -242,6 +261,15 @@ const domElements = {
         todoElements.forEach((element) => todoContainer.append(element));
 
     },
+
+    addSelectedStyle: function(item) {
+        const elements = Array.from(document.querySelectorAll('#date-sorted > *, .label'));
+        elements.find((element) => element.classList.contains('selected')).classList.remove('selected');
+        
+        const found = elements.find((element) => element === item);
+        
+        found.classList.add('selected');
+    }
 
 
 };

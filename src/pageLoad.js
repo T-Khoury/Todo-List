@@ -10,13 +10,15 @@ const pageLoad = function () {
     todoApp.acceptData();
     domElements.renderProjects();
     domEvents.domUpdates();
+    const todayButton = document.getElementById('today');
+    todayButton.classList.add('selected');
 
     storage.retrieveStorage();
     storage.getUpdates();
     domEvents.dateListeners();
     todoApp.todaysTodos();
-
     
+
 };
 
 

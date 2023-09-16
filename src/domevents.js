@@ -82,6 +82,7 @@ const domEvents = {
     projectEventListener: function(projectLabel) {
         projectLabel.addEventListener('click', function () {
             domEvents.changeTodoContainerClass(projectLabel);
+            domElements.addSelectedStyle(this);
         });
     },
 
@@ -97,8 +98,9 @@ const domEvents = {
     },
 
     checkForInstantRender: function(todo) {
-        let currentActiveProject = document.getElementById('todo-container').getAttribute('class');
-        if (currentActiveProject === todo.project) {
+        let currentActiveProject = document.getElementById('todo-container').getAttribute('class'); 
+        let currentSelected = Array.from(document.querySelectorAll('#date-sorted > *, .label')).find((element) => element.classList.contains('selected'));
+        if (currentSelected.textContent === todo.project) {
             domElements.renderTodos(todo.project);
         } else {
             return;
@@ -108,16 +110,19 @@ const domEvents = {
 
     dateListeners: function() {
         const todayButton = document.getElementById('today');
-        todayButton.addEventListener('click', () => {
+        todayButton.addEventListener('click', function () {
             todoApp.todaysTodos();
+            domElements.addSelectedStyle(this);
         });
         const weekButton = document.getElementById('this-week');
-        weekButton.addEventListener('click', () => {
+        weekButton.addEventListener('click', function () {
             todoApp.thisWeeksTodos();
+            domElements.addSelectedStyle(this);
         });
         const monthButton = document.getElementById('this-month');
-        monthButton.addEventListener('click', () => {
+        monthButton.addEventListener('click', function () {
             todoApp.thisMonthsTodos();
+            domElements.addSelectedStyle(this);
         });
     }
 

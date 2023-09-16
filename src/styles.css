@@ -190,6 +190,10 @@ button#project-submit {
     cursor: grab;
 }
 
+.dated:hover {
+    font-size: 2rem;
+}
+
 .modal {
     display: grid;
     position: fixed;
@@ -233,10 +237,14 @@ button#project-submit {
     column-gap: .75rem;
 }
 
-.project:hover {
+.project>p:hover {
     font-size: 1.7rem;
 }
 
+.selected {
+    text-decoration: underline;
+
+}
 .todo-element {
     display: flex;
     flex-wrap: wrap;

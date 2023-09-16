@@ -43,7 +43,7 @@ const todoApp = {
         createProject('Personal');
     },
 
-    todaysTodos: function(todoapp) {
+    todaysTodos: function() {
         let todaysTodosArray = [];
         let todayProject = {
             title: 'Today',
@@ -65,7 +65,7 @@ const todoApp = {
         
     },
 
-    thisWeeksTodos: function(todoapp) {
+    thisWeeksTodos: function() {
         let thisWeeksTodosArray = [];
         let thisWeekProject = {
             title: 'This Week',
@@ -85,7 +85,7 @@ const todoApp = {
         todoApp.projects.pop();;
     },
 
-    thisMonthsTodos: function(todoapp) {
+    thisMonthsTodos: function() {
         let thisMonthsTodosArray = [];
         let thisMonthProject = {
             title: 'This Month',
